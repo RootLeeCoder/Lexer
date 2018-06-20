@@ -295,20 +295,20 @@ void scanner(char* str) // 词法分析器
 				while(true)
 				{
 					ch = getChar(str);
-					if(isdigit(ch))
+					if (isdigit(ch)) // 如果是数字
 						strBox[pos++] = ch;
 					else if(ch == 'E' || ch == 'e')
 					{
 						strBox[pos++] = ch;
-						state = 4;
+						state = 4; // 如果是科学计数法，进入状态4
 					}
 					else
 					{
 						strBox[pos] = '\0';
-						output("NUM", strBox);
+						output("NUM", strBox); // 输出数字
 						retract(str);
 						pos = 0;
-						state = 0;
+						state = 0; // 返回状态0
 						break;
 					}
 				}
@@ -319,7 +319,7 @@ void scanner(char* str) // 词法分析器
 				while(true)
 				{
 					ch = getChar(str);
-					if(isdigit(ch))
+					if(isdigit(ch)) // 如果是数字
 						strBox[pos++] = ch;
 					else
 					{
@@ -327,7 +327,7 @@ void scanner(char* str) // 词法分析器
 						output("NUM", strBox);
 						retract(str);
 						pos = 0;
-						state = 0;
+						state = 0; // 返回状态0
 						break;
 					}
 				}
