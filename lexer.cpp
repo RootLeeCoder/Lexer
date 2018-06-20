@@ -238,17 +238,19 @@ void scanner(char* str) // 词法分析器
 			}
 			case 1: // 状态1
 			{
-				while (true) {
+				while (true)
+				{
 					ch = getChar(str);
-					if (isalnum(ch) || ch == '_')
+					if (isalnum(ch) || ch == '_') // 判断是否为字母或数字或下划线
 						strBox[pos++] = ch;
-					else {
+					else
+					{
 						strBox[pos] = '\0';
-						int id = findKey(strBox);
-						if(id == 0)
-							output("ID", strBox);
+						int id = findKey(strBox); // 判断是否为关键字
+						if (id == 0)
+							output("ID", strBox); // 不是关键字，是标识符
 						else
-							output("KEY", strBox);
+							output("KEY", strBox); // 是关键字
 						retract(str);
 						pos = 0;
 						state = 0;
@@ -257,24 +259,23 @@ void scanner(char* str) // 词法分析器
 				}
 				break;
 			}
-			case 2: // 2状态
+			case 2: // 状态2
 			{
 				while(true)
 				{
 					ch = getChar(str);
-
-					if(isdigit(ch))
+					if(isdigit(ch)) // 判断是否为数字
 						strBox[pos++] = ch;
 					else if(ch == '.')
 					{
 						strBox[pos++] = ch;
-						state = 3;
+						state = 3; // 如果有小数点，转状态3
 						break;
 					}
-					else if(ch == 'E' || ch == 'e')
+					else if (ch == 'E' || ch == 'e')
 					{
 						strBox[pos++] = ch;
-						state = 4;
+						state = 4; // 如果是科学计数法，转状态4
 						break;
 					}
 					else
@@ -289,7 +290,7 @@ void scanner(char* str) // 词法分析器
 				}
 				break;
 			}
-			case 3: // 3状态
+			case 3: // 状态3
 			{
 				while(true)
 				{
@@ -313,7 +314,7 @@ void scanner(char* str) // 词法分析器
 				}
 				break;
 			}
-			case 4: // 4状态
+			case 4: // 状态4
 			{
 				while(true)
 				{
@@ -337,9 +338,9 @@ void scanner(char* str) // 词法分析器
 				output("ERR", strBox);
 				break;
 			}
-		};
-	};
-};
+		}
+	}
+}
 
 int main()
 {
