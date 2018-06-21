@@ -53,6 +53,7 @@ void scanner(char* str) // 词法分析器
 	int state = 0; // 初始状态
 	char ch = ' ';
 	int pos = 0;
+	int lineCount = 1; // 行号
 	while (ch != '\0') // 循环读取
 	{
 		switch (state) // 判断状态转换
@@ -74,10 +75,21 @@ void scanner(char* str) // 词法分析器
 					8. 其它
 					*/
 
-					// 1. 空格情况，此时归零
+					// // 0. 换行情况
+					// case '\n':
+					// {
+					// 	// lineCount++;
+					// 	pos = 0;
+					// 	break;
+					// }
+					// 1. 换行/空格情况
+					case '\n':
 					case ' ':
+					{
+						lineCount++;
 						pos = 0;
 						break;
+					}
 					// 2. 界符(delimiter)情况
 					case '[':
 					case ']':
@@ -293,7 +305,7 @@ void scanner(char* str) // 词法分析器
 								strBox[pos] = '\0';
 								output("ERR_ID", strBox);
 								cout << "^\t\t\t";
-								cout << "ID Dentify ERROR!!!!!!!!" << endl << endl;
+								cout << "ID Dentify ERROR!!!!!!!!	Line: " << lineCount << endl << endl;
 								retract(str);
 								pos = 0;
 								state = 0;
