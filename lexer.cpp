@@ -1,7 +1,7 @@
 # include <bits/stdc++.h>
 using namespace std;
 
-const char* FILE_NAME = "testtext.c"; // 设置读入文本
+const char* FILE_NAME = "testtext.c"; // 读入待处理程序
 char strBuffer[1024]; // 设置字符缓冲器
 char strBox[100]; // 用于处理待存放的字符数组
 
