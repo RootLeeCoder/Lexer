@@ -279,6 +279,29 @@ void scanner(char* str) // 词法分析器
 						state = 4; // 如果是科学计数法，转状态4
 						break;
 					}
+					else if ((isalpha(ch) && !(ch == 'E' || ch == 'e')) || ch == '_') // 非法标识符
+					{
+						while (true)
+						{
+							ch = getChar(str);
+							if (isalnum(ch) || ch == '_')
+							{
+								strBox[pos++] = ch;
+							}
+							else
+							{
+								strBox[pos] = '\0';
+								output("ERR_ID", strBox);
+								cout << "^\t\t\t";
+								cout << "ID Dentify ERROR!!!!!!!!" << endl << endl;
+								retract(str);
+								pos = 0;
+								state = 0;
+								break;
+							}
+						}
+						break;
+					}
 					else
 					{
 						strBox[pos] = '\0';
