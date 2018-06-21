@@ -20,7 +20,8 @@ const char* KEYWORDS[] = // ÉèÖÃ¹Ø¼ü×Ö
 	"break",
 	"continue",
 	"main",
-	"return"
+	"return",
+	"bool"
 };
 
 void retract(char* &str) // ×Ö·ûËõ½ø
