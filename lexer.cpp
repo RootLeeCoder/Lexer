@@ -292,7 +292,16 @@ void scanner(char* str) // 词法分析器
 						state = 4; // 如果是科学计数法，转状态4
 						break;
 					}
-					else if ((isalpha(ch) && !(ch == 'E' || ch == 'e')) || ch == '_') // 非法标识符
+					else if (ch == ' ' || ch == ',' || ch == ';')
+					{
+						strBox[pos] = '\0';
+						output("NUM", strBox);
+						retract(str);
+						pos = 0;
+						state = 0;
+						break;
+					}
+					else // 出错情况
 					{
 						while (true)
 						{
@@ -304,8 +313,7 @@ void scanner(char* str) // 词法分析器
 							else
 							{
 								strBox[pos] = '\0';
-								output("ERR_ID", strBox);
-								cout << "^\t\t\t";
+								cout << "\t\t\t";
 								cout << "ERROR!!!!!!!!	Line: " << lineCount << endl << endl;
 								retract(str);
 								pos = 0;
@@ -313,15 +321,6 @@ void scanner(char* str) // 词法分析器
 								break;
 							}
 						}
-						break;
-					}
-					else
-					{
-						strBox[pos] = '\0';
-						output("NUM", strBox);
-						retract(str);
-						pos = 0;
-						state = 0;
 						break;
 					}
 				}
