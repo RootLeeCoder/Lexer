@@ -84,7 +84,7 @@ void scanner(char* str) // 词法分析器
 					}
 					case '\n':
 					{
-						cout << "line" << endl;
+						// cout << "line" << endl;
 						lineCount++;
 						pos = 0;
 						break;	
@@ -306,7 +306,7 @@ void scanner(char* str) // 词法分析器
 								strBox[pos] = '\0';
 								output("ERR_ID", strBox);
 								cout << "^\t\t\t";
-								cout << "ID Dentify ERROR!!!!!!!!	Line: " << lineCount << endl << endl;
+								cout << "ERROR!!!!!!!!	Line: " << lineCount << endl << endl;
 								retract(str);
 								pos = 0;
 								state = 0;
