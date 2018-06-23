@@ -75,13 +75,6 @@ void scanner(char* str) // 词法分析器
 					8. 其它
 					*/
 
-					// // 0. 换行情况
-					// case '\n':
-					// {
-					// 	// lineCount++;
-					// 	pos = 0;
-					// 	break;
-					// }
 					// 1. 换行/空格情况
 					case ' ':
 					{
