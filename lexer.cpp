@@ -72,19 +72,17 @@ void scanner(char* str) // 词法分析器
 					5. 乘除
 					6. 等于
 					7. 小于大于
-					8. 其它
+					8. 数字/字母
 					*/
 
-					// 1. 换行/空格情况
+					// 1. 空格/换行情况
 					case ' ':
 					{
-						// cout << "space" << endl;
 						pos = 0;
 						break;
 					}
 					case '\n':
 					{
-						// cout << "line" << endl;
 						lineCount++;
 						pos = 0;
 						break;	
@@ -106,13 +104,13 @@ void scanner(char* str) // 词法分析器
 					// 3. 引号情况
 					case '"':
 					{
-						state = 0; // 此时依然为状态0
+						state = 0;
 						while((ch = getChar(str)) != '"' && ch != '\0') // 读取引号内的数
 						{
 							strBox[pos++] = ch;
 						}
 						if (ch == '\0') {
-							output("ERRO", strBox); // error错误
+							output("ERROR", strBox); // error错误
 						}
 						else {
 							strBox[pos] = '\0';
@@ -124,7 +122,7 @@ void scanner(char* str) // 词法分析器
 					// 4. 加减情况
 					case '+':
 					{
-						state = 0; // 此时依然为状态0
+						state = 0;
 						ch = getChar(str);
 						switch (ch) {
 							case '+': // 如果后一位仍是+，则运算符为++
@@ -145,7 +143,7 @@ void scanner(char* str) // 词法分析器
 					}
 					case '-':
 					{
-						state = 0; // 此时依然为状态0
+						state = 0;
 						ch = getChar(str);
 						switch (ch) {
 							case '-':
@@ -250,7 +248,6 @@ void scanner(char* str) // 词法分析器
 			}
 			case 1: // 状态1
 			{
-				// cout << "Hello1" << endl;
 				while (true)
 				{
 					ch = getChar(str);
@@ -274,7 +271,6 @@ void scanner(char* str) // 词法分析器
 			}
 			case 2: // 状态2
 			{
-				// cout << "Hello2" << endl;
 				while(true)
 				{
 					ch = getChar(str);
@@ -286,7 +282,7 @@ void scanner(char* str) // 词法分析器
 						state = 3; // 如果有小数点，转状态3
 						break;
 					}
-					else if (ch == 'E' || ch == 'e')
+					else if (ch == 'E' || ch == 'e') // 科学计数法
 					{
 						strBox[pos++] = ch;
 						state = 4; // 如果是科学计数法，转状态4
@@ -328,7 +324,6 @@ void scanner(char* str) // 词法分析器
 			}
 			case 3: // 状态3
 			{
-				// cout << "Hello3" << endl;
 				while(true)
 				{
 					ch = getChar(str);
@@ -354,7 +349,6 @@ void scanner(char* str) // 词法分析器
 			}
 			case 4: // 状态4
 			{
-				// cout << "Hello4" << endl;
 				while(true)
 				{
 					ch = getChar(str);
