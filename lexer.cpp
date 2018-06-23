@@ -4,6 +4,7 @@ using namespace std;
 const char* FILE_NAME = "testtext.c"; // 读入待处理程序
 char strBuffer[1024]; // 设置字符缓冲器
 char strBox[100]; // 用于处理待存放的字符数组
+int lineCount = 1; // 行号
 
 const char* KEYWORDS[] = // 设置关键字
 {
@@ -53,7 +54,6 @@ void scanner(char* str) // 词法分析器
 	int state = 0; // 初始状态
 	char ch = ' ';
 	int pos = 0;
-	int lineCount = 1; // 行号
 	while (ch != '\0') // 循环读取
 	{
 		switch (state) // 判断状态转换
@@ -83,12 +83,18 @@ void scanner(char* str) // 词法分析器
 					// 	break;
 					// }
 					// 1. 换行/空格情况
-					case '\n':
 					case ' ':
 					{
-						lineCount++;
+						// cout << "space" << endl;
 						pos = 0;
 						break;
+					}
+					case '\n':
+					{
+						cout << "line" << endl;
+						lineCount++;
+						pos = 0;
+						break;	
 					}
 					// 2. 界符(delimiter)情况
 					case '[':
@@ -251,6 +257,7 @@ void scanner(char* str) // 词法分析器
 			}
 			case 1: // 状态1
 			{
+				// cout << "Hello1" << endl;
 				while (true)
 				{
 					ch = getChar(str);
@@ -274,6 +281,7 @@ void scanner(char* str) // 词法分析器
 			}
 			case 2: // 状态2
 			{
+				// cout << "Hello2" << endl;
 				while(true)
 				{
 					ch = getChar(str);
@@ -328,6 +336,7 @@ void scanner(char* str) // 词法分析器
 			}
 			case 3: // 状态3
 			{
+				// cout << "Hello3" << endl;
 				while(true)
 				{
 					ch = getChar(str);
@@ -347,16 +356,20 @@ void scanner(char* str) // 词法分析器
 						state = 0; // 返回状态0
 						break;
 					}
+					break;
 				}
 				break;
 			}
 			case 4: // 状态4
 			{
+				// cout << "Hello4" << endl;
 				while(true)
 				{
 					ch = getChar(str);
-					if(isdigit(ch)) // 如果是数字
+					if(isdigit(ch) || ch=='+' || ch=='-') // 如果是数字或符号
+					{
 						strBox[pos++] = ch;
+					}
 					else
 					{
 						strBox[pos] = '\0';
